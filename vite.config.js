@@ -7,4 +7,5 @@ export default defineConfig({
     react(),        // 👈 keep this
     tailwindcss(),  // 👈 Tailwind plugin
   ],
+  base: '/nova/',
 })
