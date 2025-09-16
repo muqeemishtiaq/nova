@@ -5,6 +5,7 @@ import Contact from "./Contact";
 
 const Plan = () => {
   const [customerName, setCustomerName] = useState("");
+  const [deviceName, setDeviceName] = useState(""); // ✅ New state for device name
   const [error, setError] = useState("");
   const inputRef = useRef(null);
 
@@ -27,7 +28,7 @@ const Plan = () => {
   const whatsappNumber = "447598977421";
 
   const createWhatsAppLink = (plan) => {
-    const message = `Hello, my name is ${customerName}. I want to choose *${selectedService}* with the ${plan.duration} plan (${plan.price}).`;
+    const message = `Hello, my name is ${customerName}. My device is *${deviceName}*. I want to choose *${selectedService}* with the ${plan.duration} plan (${plan.price}).`;
 
     return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
   };
@@ -62,8 +63,22 @@ const Plan = () => {
                 setError("");
               }}
               required
+              className="px-4 py-2 rounded-lg border border-purple-500/40 bg-black text-white focus:outline-none focus:border-blue-500 w-80 mb-4"
+            />
+
+            {/* Device Name Input */}
+            <input
+              type="text"
+              placeholder="Enter your device name"
+              value={deviceName}
+              onChange={(e) => {
+                setDeviceName(e.target.value);
+                setError("");
+              }}
+              required
               className="px-4 py-2 rounded-lg border border-purple-500/40 bg-black text-white focus:outline-none focus:border-blue-500 w-80"
             />
+
             {error && <p className="text-red-500 mt-2">{error}</p>}
           </div>
 
@@ -77,11 +92,11 @@ const Plan = () => {
                 <h3 className="text-2xl font-semibold mb-4">{plan.duration}</h3>
                 <p className="text-3xl font-bold mb-6 text-purple-300">{plan.price}</p>
                 <a
-                  href={customerName ? createWhatsAppLink(plan) : "#"}
+                  href={customerName && deviceName ? createWhatsAppLink(plan) : "#"}
                   onClick={(e) => {
-                    if (!customerName) {
+                    if (!customerName || !deviceName) {
                       e.preventDefault();
-                      setError("Please enter your name before selecting a plan.");
+                      setError("Please enter your name and device name before selecting a plan.");
                       inputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
                       inputRef.current?.focus();
                     }
@@ -89,7 +104,7 @@ const Plan = () => {
                   target="_blank"
                   rel="noreferrer"
                   className={`px-6 py-2 rounded transition ${
-                    customerName
+                    customerName && deviceName
                       ? "bg-blue-500 text-white hover:bg-blue-600"
                       : "bg-gray-500 text-gray-300 cursor-not-allowed"
                   }`}
