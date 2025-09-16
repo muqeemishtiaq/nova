@@ -1,14 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Contact from "./Contact"; // using Contact instead of Footer
 
 const Plan = () => {
+  const [customerName, setCustomerName] = useState("");
+
   const plans = [
-    { id: 0, duration: "Free Trial", price: "24 Hours" },
-    { id: 1, duration: "1 Month", price: "£12" },
-    { id: 2, duration: "3 Months", price: "£30" },
-    { id: 3, duration: "6 Months", price: "£40" },
-    { id: 4, duration: "12 Months", price: "£60" },
+    { 
+      id: 0, 
+      duration: "Free Trial", 
+      price: "24 Hours",
+      message: "I want to try the Free 24 Hours Trial."
+    },
+    { 
+      id: 1, 
+      duration: "1 Month", 
+      price: "£12",
+      message: "I am interested in subscribing for 1 Month (£12)."
+    },
+    { 
+      id: 2, 
+      duration: "3 Months", 
+      price: "£30",
+      message: "I would like to subscribe for 3 Months (£30)."
+    },
+    { 
+      id: 3, 
+      duration: "6 Months", 
+      price: "£40",
+      message: "I want to get the 6 Months plan (£40)."
+    },
+    { 
+      id: 4, 
+      duration: "12 Months", 
+      price: "£60",
+      message: "I want to go with the 12 Months plan (£60)."
+    },
   ];
 
   // ✅ Scroll to top when page loads
@@ -17,8 +44,17 @@ const Plan = () => {
   }, []);
 
   // ✅ Replace with your WhatsApp number
-  const whatsappNumber = "923324641401";   const createWhatsAppLink = (plan) =>
-    `https://wa.me/${whatsappNumber}?text=Hello,%20I%20want%20to%20choose%20the%20${plan.duration}%20plan%20(${plan.price}).`;
+  const whatsappNumber = "447598977421";
+
+  // ✅ Create dynamic WhatsApp link with custom messages
+  const createWhatsAppLink = (plan) => {
+    const intro = customerName
+      ? `Hello, my name is ${customerName}. `
+      : "Hello, ";
+    
+    const message = intro + plan.message;
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-black relative overflow-hidden">
@@ -33,7 +69,18 @@ const Plan = () => {
       {/* Main Content */}
       <main className="flex-1 relative z-10 py-20 px-6">
         <div className="max-w-6xl mx-auto text-center text-white">
-          <h2 className="text-4xl font-bold mb-12">Choose Your Plan</h2>
+          <h2 className="text-4xl font-bold mb-8">Choose Your Plan</h2>
+
+          {/* Customer Name Input */}
+          <div className="mb-12">
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+              className="px-4 py-2 rounded-lg border border-purple-500/40 bg-black text-white focus:outline-none focus:border-blue-500 w-80"
+            />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {plans.map((plan) => (

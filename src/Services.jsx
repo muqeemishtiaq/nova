@@ -42,7 +42,7 @@ const Services = () => {
                 to="/plan"
                 className="inline-block bg-cyan-500 text-black px-6 py-2 rounded shadow-[0_0_15px_#00f6ff] hover:bg-cyan-400 hover:shadow-[0_0_25px_#00f6ff] transition"
               >
-                Select Plan
+                Choose Plan
               </Link>
             </div>
           ))}
