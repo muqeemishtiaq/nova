@@ -32,7 +32,7 @@ const About = () => {
             About Us
           </h2>
           <p className="text-gray-200 leading-relaxed mb-8">
-            Sky Nova is a leading streaming network with 13+ years of experience, offering over 31,000 channels worldwide. Trusted by more than 400K clients, we deliver top-quality entertainment: live TV, movies, sports, and more — anytime, anywhere.
+            Sky Nova is a leading streaming network with 13+ years of experience, offering over 31,000 channels worldwide. Trusted by more than 400K clients, we deliver top-quality entertainment: live TV, movies, sports, and more anytime, anywhere.
           </p>
           <div className="flex justify-center md:justify-start">
             <button className="bg-cyan-500 text-black px-8 py-3 rounded 
