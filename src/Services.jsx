@@ -15,7 +15,7 @@ const Services = () => {
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-600 rounded-full blur-3xl opacity-30 animate-pulse"></div>
       <div className="absolute top-1/2 left-0 w-64 h-64 bg-indigo-500 rounded-full blur-3xl opacity-20 animate-ping"></div>
 
-      {/* Overlay for readability */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/70"></div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -37,9 +37,10 @@ const Services = () => {
               <h3 className="text-xl font-semibold mb-3">{product.title}</h3>
               <p className="text-gray-300 mb-6">{product.description}</p>
 
-              {/* Navigate to Plan page */}
+              {/* Pass service name in Link state */}
               <Link
                 to="/plan"
+                state={{ service: product.title }}
                 className="inline-block bg-cyan-500 text-black px-6 py-2 rounded shadow-[0_0_15px_#00f6ff] hover:bg-cyan-400 hover:shadow-[0_0_25px_#00f6ff] transition"
               >
                 Choose Plan
